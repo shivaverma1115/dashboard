@@ -9,6 +9,9 @@ import { childrenType } from "@/interFace/interFace";
 import { usePathname } from "next/navigation";
 import AdminRoute from "@/privetRoute/AdminRoute";
 import Sidebar from "@/sheardComponent/Sidebar";
+import { Provider } from "@/components/ui/provider"
+// import  Provider  from '@chakra-ui/react'
+
 export default function RootLayout({ children }: childrenType) {
   const pathName = usePathname();
   return (
@@ -32,32 +35,34 @@ export default function RootLayout({ children }: childrenType) {
 
         <body className="bg-bodyBg" suppressHydrationWarning={true}>
           <ReduxProvider>
-            <AppProvider>
-              {pathName === "/login" || pathName === "/register" ? (
-                <main>{children}</main>
-              ) : (
-                <AdminRoute>
-                  <main>
-                    <div className="cashier-dashboard-area">
-                      <Sidebar />
-                      {children}
-                    </div>
-                  </main>
-                </AdminRoute>
-              )}
-            </AppProvider>
-            <ToastContainer
-              position="top-left"
-              autoClose={1000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
+            <Provider>
+              <AppProvider>
+                {pathName === "/login" || pathName === "/register" ? (
+                  <main>{children}</main>
+                ) : (
+                  <AdminRoute>
+                    <main>
+                      <div className="cashier-dashboard-area">
+                        <Sidebar />
+                        {children}
+                      </div>
+                    </main>
+                  </AdminRoute>
+                )}
+              </AppProvider>
+              <ToastContainer
+                position="top-left"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </Provider>
           </ReduxProvider>
         </body>
       </html>
