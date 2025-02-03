@@ -20,7 +20,7 @@ const GetVideos = ({ data }: { data: { title: string; _id: string; isExpired: bo
                             <tr key={i} className="hover:bg-gray-100">
                                 <td className="px-6 py-3 text-center">
                                     <Link
-                                        href={`https://client-mocha-zeta.vercel.app/sample-video/${ele._id}`}
+                                        href={`${process.env.NEXT_PUBLIC_CLIENT_URL}sample-video/${ele._id}`}
                                         target="_blank"
                                         className="text-blue-500 font-semibold hover:underline"
                                     >
