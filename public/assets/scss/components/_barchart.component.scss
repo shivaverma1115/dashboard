@@ -1,0 +1,11 @@
+#chartBar {
+	width: calc(100% - 16px);
+    overflow: hidden;
+}
+.apexcharts-xaxis-label,
+.apexcharts-yaxis-label {
+    font-size: 14px;
+    color: var(--clr-body-bodyText);
+    font-family: 'Nunito Sans', sans-serif !important;
+}
+

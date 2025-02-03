@@ -1,0 +1,26 @@
+.cashier-quickview {
+    width: 100%;
+    min-height: 275px;
+}
+.cashier-quickview-last {
+    min-width: 80px;
+    min-height: 275px;
+    width: 8%;
+    @media (max-width: 1400px) {
+        min-width: 0px;
+        width: 31.33%;
+    }
+    @media (max-width: 991px) {
+        min-width: 0px;
+        width: 31%;
+    }
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+}
+.cashier-quickview-wrapper {
+    @media (max-width: 1400px) {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

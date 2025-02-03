@@ -1,0 +1,19 @@
+
+.apexcharts-title-text {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: var(--clr-body-heading) !important;
+    transform: translateX(12px) !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+}
+.apexcharts-xaxis-label,
+.apexcharts-yaxis-label {
+    font-size: 14px;
+    color: var(--clr-body-bodyText);
+    font-family: 'Nunito Sans', sans-serif !important;
+}
+.apexcharts-toolbar {
+	display: none !important;
+}
+
