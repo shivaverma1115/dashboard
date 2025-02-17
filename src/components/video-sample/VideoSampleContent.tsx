@@ -13,12 +13,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import GetVideos from "./GetVideos";
 import { IWeddingInfoType } from "@/interFace/interFace";
+import Preloader from "@/sheardComponent/Preloader/Preloader";
+import { Box, Center, Skeleton, Spinner } from "@chakra-ui/react";
 
 
 const VideoSampleContent = () => {
-  const { user, setUpdate } = useGlobalContext();
+  const { setUpdate } = useGlobalContext();
   const [upload, setupload] = useState<boolean>(false);
   const [videoUrl, setvideoUrl] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<IWeddingInfoType[]>([
     {
       title: "",
@@ -36,7 +39,7 @@ const VideoSampleContent = () => {
 
   const handleGetVideos = async () => {
     axios
-      .post(
+      .get(
         `${process.env.BASE_URL}video`
       )
       .then((res) => {
@@ -92,6 +95,7 @@ const VideoSampleContent = () => {
   };
 
   const handleVideoUpload = async (e: any) => {
+    setLoading(true);
     console.log('Video upload initiated');
     const file = e.target.files[0];
 
@@ -122,6 +126,7 @@ const VideoSampleContent = () => {
         console.error("Upload error:", error.message);
       } finally {
         setupload(true)
+        setLoading(false);
       }
     } else {
       console.error("Please upload a valid video file.");
@@ -147,9 +152,9 @@ const VideoSampleContent = () => {
         <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg mb-1">
           <div className="cashier-profile-area">
             <div className="cashier-profile-wrapper flex items-center maxSm:block pb-1 mb-14">
-              <div className="cashier-profile-info flex items-center mr-20 maxSm:mr-0 maxSm:mb-5">
-                <div className="cashier-profile-info-img mr-5 og-profile-img">
-                  {upload === false && user?.photo === "" && (
+              <div>
+                <div>
+                  {/* {upload === false && user?.photo === "" && (
                     <Image
                       className="mb-5"
                       width={150}
@@ -168,45 +173,56 @@ const VideoSampleContent = () => {
                       src={user?.photo}
                       alt="img not found"
                     />
-                  )}
+                  )} */}
 
-                  <div className="cashier-input-field-style">
-                    <div className="single-input-field w-full single-input-field-file">
-                      {upload === false ? (
-                        <>
-                          <label htmlFor="profileVideo">
-                            <i className="fa-regular fa-folder-arrow-up"></i>
-                            Upload
-                          </label>
-                          <input
-                            type="file"
-                            id="profileVideo"
-                            className="hidden"
-                            accept="video/*"
-                            onChange={handleVideoUpload}
-                          />
-                        </>
-                      ) : (
-                        <div className="img_upload_preview og-profile-img">
-                          <video
-                            controls
-                            width="500"
-                            height="500"
-                            style={{ width: "100%", height: "100%" }}
-                          >
-                            <source src={videoUrl} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                          <button
-                            onClick={handleClearSingleImg}
-                            className="custome_remove_icon"
-                          >
-                            <i className="fa-solid fa-xmark"></i>
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                  <div >
+                    {upload === false ? (
+                      <>
+                        <label htmlFor="profileVideo" style={{ backgroundColor: 'gray', padding: '10px' }} >
+                          <i className="fa-regular fa-folder-arrow-up"></i>
+                          Upload
+                        </label>
+                        <input
+                          type="file"
+                          id="profileVideo"
+                          className="hidden"
+                          accept="video/*"
+                          onChange={handleVideoUpload}
+                        />
+                      </>
+                    ) : (
+                      <div className="">
+                        <video
+                          controls
+                          width="500"
+                          height="500"
+                          style={{ width: "100%", height: "100%" }}
+                        >
+                          <source src={videoUrl} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        <button
+                          onClick={handleClearSingleImg}
+                          className="custome_remove_icon"
+                        >
+                          <i className="fa-solid fa-xmark"></i>
+                        </button>
+                      </div>
+                    )}
                   </div>
+                  {loading &&
+                    <Center h="5vh">
+                      <Box
+                        border="4px solid"
+                        borderColor="gray.300"
+                        borderTopColor="blue.500"
+                        borderRadius="50%"
+                        w="50px"
+                        h="50px"
+                        animation="spin 0.8s linear infinite"
+                      />
+                    </Center>
+                  }
                 </div>
               </div>
 

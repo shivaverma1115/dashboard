@@ -1,11 +1,14 @@
 //@refresh
-
-import HomePageMain from "@/components/home-page/HomePageMain";
+import VideoSampleMain from "@/components/video-sample/VideoSampleMain";
+import ContentWrapper from "@/layout/sidebar/ContentWrapper";
 
 const HomePage = () => {
   return (
     <>
-      <HomePageMain />
+      {/* <HomePageMain /> */}
+      <ContentWrapper breadCampTitle='Video Sample'>
+        <VideoSampleMain />
+      </ContentWrapper>
     </>
   );
 };
